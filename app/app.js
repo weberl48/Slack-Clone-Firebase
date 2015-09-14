@@ -24,15 +24,38 @@
         .state('login', {
           url: '/login',
           controller: 'AuthCtrl as authCtrl',
-          templateUrl: 'auth/login.html'
+          templateUrl: 'auth/login.html',
+          resolve: {
+            requireNoAuth: function($state, Auth) {
+              return Auth.$requireAuth().then(function(auth) {
+                $state.go('home');
+              }, function(error) {
+                return;
+              });
+            }
+          }
         })
         .state('register', {
           url: '/register',
           controller: 'AuthCtrl as authCtrl',
-          templateUrl: 'auth/register.html'
+          templateUrl: 'auth/register.html',
+          resolve: {
+            requireNoAuth: function($state, Auth) {
+              return Auth.$requireAuth().then(function(auth) {
+                $state.go('home');
+              }, function(error) {
+                return;
+              });
+            }
+          }
         })
 
       $urlRouterProvider.otherwise('/');
     })
     .constant('FirebaseUrl', 'https://slack-firebase.firebaseio.com/');
 })()
+
+// $requireAuth:
+  // - firebaseAuth service function
+  // - returns a promise (auth obj)
+  
