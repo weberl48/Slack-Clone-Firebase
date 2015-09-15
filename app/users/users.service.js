@@ -11,6 +11,10 @@
         getDisplayName: function(uid) {
           return users.$getRecord(uid).displayName;
         },
+        //helper function return url to a user's gravatar image 
+        getGravatar: function(uid) {
+          return '//www.gravatar.com/avatar/' + users.$getRecord(uid).emailHash;
+        },
         all: users
       };
       return Users;
@@ -32,5 +36,5 @@
 // - $add, $remove manipulate serve data
 
 // getProfile(uid):
-  // - get a $firebaseObject of specific user profile
-  // - 
+// - get a $firebaseObject of specific user profile
+// -
